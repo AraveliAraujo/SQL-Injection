@@ -13,7 +13,10 @@ public class LogeoD extends Dao {
         LogeoM usu;
         try {
             String sql = "SELECT * FROM VW_LOGIN WHERE USEREMP LIKE '" + user + "' AND PSSEMP LIKE '" + pass + "'";
+//            String sql = "SELECT * FROM VW_LOGIN WHERE USEREMP LIKE ? AND PSSEMP LIKE ? ";
             PreparedStatement ps = this.getCn().prepareCall(sql);
+//            ps.setString(1, user);
+//            ps.setString(2, pass);
             rs = ps.executeQuery();
             if (rs.next()) {
                 usu = new LogeoM();
