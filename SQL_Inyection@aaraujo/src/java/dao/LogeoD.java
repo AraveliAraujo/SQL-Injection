@@ -5,17 +5,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import modelo.LogeoM;
 
-public class LogeoD extends Dao{
-    
+public class LogeoD extends Dao {
+
     public LogeoM validar(String user, String pass) throws Exception {
         this.Conectar();
         ResultSet rs;
         LogeoM usu;
         try {
-            String sql = "SELECT * FROM VW_LOGIN WHERE USEREMP LIKE ? AND PSSEMP LIKE ?";
+            String sql = "SELECT * FROM VW_LOGIN WHERE USEREMP LIKE '" + user + "' AND PSSEMP LIKE '" + pass + "'";
             PreparedStatement ps = this.getCn().prepareCall(sql);
-            ps.setString(1, user);
-            ps.setString(2, pass);
             rs = ps.executeQuery();
             if (rs.next()) {
                 usu = new LogeoM();
@@ -40,10 +38,10 @@ public class LogeoD extends Dao{
             }
         } catch (SQLException e) {
             throw e;
-        } finally{
+        } finally {
             this.Cerrar();
         }
         return usu;
     }
-    
+
 }
